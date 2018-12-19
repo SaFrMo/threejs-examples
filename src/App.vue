@@ -5,7 +5,7 @@
         <ul class="grid">
             <li class="item" v-for="(cmp, i) in toRender" :key="i">
                 <button class="wrap">
-                    <span class="title">Breathing Tower</span>
+                    <span class="title" v-html="startCase(cmp)" />
                     <component :is="cmp" />
                 </button>
             </li>
@@ -15,15 +15,21 @@
 
 <script>
 import PurpleTower from './examples/PurpleTower'
+import WanderingNav from './examples/WanderingNav'
+import startCase from 'lodash/startCase'
 
 export default {
     components: {
-        'purple-tower': PurpleTower
+        'breathing-tower': PurpleTower,
+        'wandering-nav': WanderingNav
     },
     data() {
         return {
-            toRender: ['purple-tower']
+            toRender: ['breathing-tower', 'wandering-nav']
         }
+    },
+    methods: {
+        startCase
     }
 }
 </script>
@@ -52,9 +58,12 @@ export default {
         list-style: none;
         padding: 0;
         margin: 0;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-gap: 15px;
 
         .item {
-            width: 180px;
+            width: 200px;
             height: 200px;
             position: relative;
             border: 1px solid $black;
@@ -74,7 +83,7 @@ export default {
                 left: 0;
                 background: $white;
                 font-size: 16px;
-                padding: 5px;
+                padding: 10px 5px;
             }
             .wrap {
                 position: relative;

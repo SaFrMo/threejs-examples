@@ -5,13 +5,15 @@
     "main": "index.js",
     "scripts": {
         "dev": "vue serve ./src/App.vue",
-        "build": "vue build ./src/App.vue"
+        "build": "vue build ./src/App.vue",
+        "deploy": "npm run build && git add . && git commit -m \"Deploy\" && git push"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "@vue/cli": "^3.2.1",
+        "lodash": "^4.17.11",
         "node-sass": "^4.11.0",
         "sass-loader": "^7.1.0",
         "vue-three-wrap": "^1.0.1"
