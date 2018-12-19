@@ -1,0 +1,17 @@
+{
+    "name": "three-examples",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vue serve src/App.vue"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.1.0",
+        "vue-three-wrap": "^1.0.1"
+    }
+}
