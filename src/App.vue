@@ -10,6 +10,8 @@
                 </button>
             </li>
         </ul>
+
+        <wandering-nav />
     </main>
 </template>
 
