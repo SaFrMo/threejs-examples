@@ -3,9 +3,11 @@
         <h2>Examples</h2>
 
         <ul class="grid">
-            <li>
-                <!-- <span class="title">Breathing Tower</span> -->
-                <div class="wrap"><purple-tower /></div>
+            <li class="item" v-for="(cmp, i) in toRender" :key="i">
+                <button class="wrap">
+                    <span class="title">Breathing Tower</span>
+                    <component :is="cmp" />
+                </button>
             </li>
         </ul>
     </main>
@@ -17,6 +19,11 @@ import PurpleTower from './examples/PurpleTower'
 export default {
     components: {
         'purple-tower': PurpleTower
+    },
+    data() {
+        return {
+            toRender: ['purple-tower']
+        }
     }
 }
 </script>
@@ -27,18 +34,30 @@ export default {
 .three-examples {
     font-family: $font-family;
 
+    button {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            .title {
+                z-index: 5;
+            }
+        }
+    }
     .grid {
         list-style: none;
         padding: 0;
         margin: 0;
 
-        li {
-            width: 200px;
+        .item {
+            width: 180px;
             height: 200px;
             position: relative;
             border: 1px solid $black;
-            border-radius: 10px;
-            // background: rgba($color4, 0.1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -49,6 +68,13 @@ export default {
                 font-family: $header-font;
                 text-transform: lowercase;
                 font-weight: 700;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                background: $white;
+                font-size: 16px;
+                padding: 5px;
             }
             .wrap {
                 position: relative;
