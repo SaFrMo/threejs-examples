@@ -18,16 +18,22 @@
 <script>
 import PurpleTower from './examples/PurpleTower'
 import WanderingNav from './examples/WanderingNav'
+import HoverLight from './examples/HoverLight'
 import startCase from 'lodash/startCase'
 
 export default {
     components: {
         'breathing-tower': PurpleTower,
-        'wandering-spheres': WanderingNav
+        'wandering-spheres': WanderingNav,
+        'revolving-lights': HoverLight
     },
     data() {
         return {
-            toRender: ['breathing-tower', 'wandering-spheres']
+            toRender: [
+                'breathing-tower',
+                'wandering-spheres',
+                'revolving-lights'
+            ]
         }
     },
     methods: {
