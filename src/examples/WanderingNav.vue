@@ -1,26 +1,60 @@
 <template>
-    <vue-three-wrap :start="start" :update="update" />
+    <vue-three-wrap
+        class="wandering-canvas"
+        ref="canvas"
+        :start="start"
+        :update="update"
+    />
 </template>
 
 <script>
+/* eslint-disable */
 import * as THREE from 'three'
 import VueThreeWrap from 'vue-three-wrap'
-import { tween, easing } from 'popmotion'
+import { tween, easing, pointer, transform } from 'popmotion'
+const { interpolate } = transform
+import rect from 'fh-components/mixins/rect'
+import { asyncWaitFor } from '@/utils/shared'
 
 const ref = {}
+const raycaster = new THREE.Raycaster()
+let hovering = []
 
 export default {
+    mixins: [rect],
     data() {
         return {
             masterX: 0,
-            masterRotation: 0
+            masterRotation: 0,
+            mouseX: 0,
+            mouseY: 0
         }
     },
     components: {
         'vue-three-wrap': VueThreeWrap
     },
+    async mounted() {
+        await asyncWaitFor('.wandering-canvas')
+
+        pointer()
+            .pipe(v => {
+                v.x -= this.clientRect.left
+                v.y -= this.clientRect.top
+                return v
+            })
+            .pipe(v => {
+                if (v.x > 1) {
+                    v.x = interpolate([0, this.clientRect.width], [-1, 1])(v.x)
+                    v.y = interpolate([0, this.clientRect.height], [1, -1])(v.y)
+                }
+                return v
+            })
+            .start(v => {
+                this.mouseX = v.x
+                this.mouseY = v.y
+            })
+    },
     methods: {
-        // TODO: 4-5 boxes bumbling from side to side - stop in place and face camera on hover
         start({ scene, camera }) {
             // add light
             ref.dirLight1 = new THREE.DirectionalLight(0xffffff, 1)
@@ -70,11 +104,30 @@ export default {
             // move camera
             camera.position.z = 10
         },
-        update() {
+        update({ camera }) {
+            // update raycaster
+            raycaster.setFromCamera(
+                new THREE.Vector2(this.mouseX, this.mouseY),
+                camera
+            )
+            hovering = raycaster.intersectObjects(ref.cubes, true)
+
             this.masterRotation += 0.01
-            ref.cubes.forEach((cube, i) => {
-                cube.position.x = this.masterX
-                cube.rotation.x = cube.rotation.z = this.masterRotation
+            const hObjects = hovering.map(h => h.object)
+            const meshes = ref.cubes.map(g => g.children[0])
+            meshes
+                .filter(x => !hObjects.includes(x))
+                .forEach(cube => {
+                    cube.parent.position.x = this.masterX
+                    cube.parent.rotation.x = cube.parent.rotation.z = this.masterRotation
+                })
+
+            meshes.forEach(cube => {
+                let color = 0xffffff
+                if (hovering.find(h => h.object == cube)) {
+                    color = 0xff0000
+                }
+                cube.material.color.set(color)
             })
         }
     }

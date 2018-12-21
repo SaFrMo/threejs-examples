@@ -11,7 +11,7 @@
             </li>
         </ul>
 
-        <wandering-nav />
+        <!-- <wandering-nav /> -->
     </main>
 </template>
 
