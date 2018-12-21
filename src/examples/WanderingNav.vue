@@ -40,13 +40,10 @@ export default {
             .pipe(v => {
                 v.x -= this.clientRect.left
                 v.y -= this.clientRect.top
-                return v
-            })
-            .pipe(v => {
-                if (v.x > 1) {
-                    v.x = interpolate([0, this.clientRect.width], [-1, 1])(v.x)
-                    v.y = interpolate([0, this.clientRect.height], [1, -1])(v.y)
-                }
+
+                v.x = interpolate([0, this.clientRect.width], [-1, 1])(v.x)
+                v.y = interpolate([0, this.clientRect.height], [1, -1])(v.y)
+
                 return v
             })
             .start(v => {

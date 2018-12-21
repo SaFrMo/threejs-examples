@@ -23,11 +23,11 @@ import startCase from 'lodash/startCase'
 export default {
     components: {
         'breathing-tower': PurpleTower,
-        'wandering-nav': WanderingNav
+        'wandering-spheres': WanderingNav
     },
     data() {
         return {
-            toRender: ['breathing-tower', 'wandering-nav']
+            toRender: ['breathing-tower', 'wandering-spheres']
         }
     },
     methods: {
