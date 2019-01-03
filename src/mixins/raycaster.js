@@ -4,12 +4,6 @@ import { asyncWaitFor } from '@/utils/shared'
 const { interpolate } = transform
 import Vue from 'vue'
 
-Vue.config.optionMergeStrategies.methods.update = (to, from) => {
-    from()
-    to()
-    return
-}
-
 export default {
     data() {
         return {
@@ -39,8 +33,6 @@ export default {
     },
     methods: {
         updateRaycaster(camera) {
-            // update raycaster
-            // eslint-disable-next-line
             this.raycaster.setFromCamera(
                 new THREE.Vector2(this.mouseX, this.mouseY),
                 camera
