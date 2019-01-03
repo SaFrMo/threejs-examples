@@ -19,20 +19,23 @@
 import PurpleTower from './examples/PurpleTower'
 import WanderingNav from './examples/WanderingNav'
 import HoverLight from './examples/HoverLight'
+import PyramidFollow from './examples/PyramidFollow'
 import startCase from 'lodash/startCase'
 
 export default {
     components: {
         'breathing-tower': PurpleTower,
         'wandering-spheres': WanderingNav,
-        'revolving-lights': HoverLight
+        'revolving-lights': HoverLight,
+        'pyramid-follow': PyramidFollow
     },
     data() {
         return {
             toRender: [
                 'breathing-tower',
-                'wandering-spheres',
-                'revolving-lights'
+                'revolving-lights',
+                'pyramid-follow',
+                'wandering-spheres'
             ]
         }
     },
