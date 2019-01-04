@@ -1,7 +1,7 @@
 ## TODO:
 
--   Tween example with PyramidFollow
--   Separate and document raycaster mixin
+-   Document raycaster mixin
+-   Research - cloning a THREE Vector3
 
 ## Adding a new example:
 

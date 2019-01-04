@@ -7,11 +7,13 @@ import VueThreeWrap from 'vue-three-wrap'
 import * as THREE from 'three'
 import raycaster from '@/mixins/raycaster'
 import rect from 'fh-components/mixins/rect'
-// import { listen } from 'popmotion'
-// import _get from 'lodash/get'
+import { tween } from 'popmotion'
 
 const ref = {}
 let toCheck = []
+let inProgress = null
+let cameraStartPos = null
+let currentlyClicked = null
 
 export default {
     mixins: [raycaster, rect],
@@ -45,7 +47,7 @@ export default {
             ref.torusKnot.position.set(-35, -30, -60)
             scene.add(ref.torusKnot)
 
-            // add closer torus
+            // add closer torus knot
             const mat2 = new THREE.MeshLambertMaterial({
                 color: 'hsl(250, 50%, 50%)'
             })
@@ -53,7 +55,7 @@ export default {
             ref.torusKnot2.position.set(0, 30, -60)
             scene.add(ref.torusKnot2)
 
-            // one last torus
+            // one last torus knot
             const mat3 = new THREE.MeshLambertMaterial({
                 color: 'hsl(200, 50%, 50%)'
             })
@@ -66,11 +68,62 @@ export default {
 
             // move camera
             camera.position.z = 10
+
+            // save initial camera position
+            cameraStartPos = {
+                x: camera.position.x,
+                y: camera.position.y,
+                z: camera.position.z
+            }
         },
-        onClick() {
-            this.updateRaycaster(this.$refs.canvas._props.camera)
-            // eslint-disable-next-line
-            console.log(this.raycaster.intersectObjects(toCheck))
+        onClick(evt) {
+            const camera = this.$refs.canvas._props.camera
+
+            // update raycaster
+            this.updateRaycaster(camera, {
+                x: evt.layerX,
+                y: evt.layerY
+            })
+
+            const intersections = this.raycaster.intersectObjects(toCheck)
+            if (intersections.length) {
+                // stop any in-progress motion
+                if (inProgress) {
+                    inProgress.stop()
+                }
+
+                // get new position for camera
+                const clickedObject = intersections[0].object
+                const clickedObjectPos = clickedObject.position
+                let newPosition = {
+                    x: clickedObjectPos.x,
+                    y: clickedObjectPos.y,
+                    z: cameraStartPos.z + 20
+                }
+
+                if (currentlyClicked == clickedObject) {
+                    newPosition = cameraStartPos
+                    currentlyClicked = null
+                } else {
+                    currentlyClicked = clickedObject
+                }
+
+                inProgress = tween({
+                    from: {
+                        x: camera.position.x,
+                        y: camera.position.y,
+                        z: camera.position.z
+                    },
+                    to: {
+                        x: newPosition.x,
+                        y: newPosition.y,
+                        z: newPosition.z
+                    },
+                    duration: 1000
+                }).start(v => {
+                    camera.position.set(v.x, v.y, v.z)
+                })
+            }
         }
     }
 }
