@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import { pointer, transform } from 'popmotion'
 import { asyncWaitFor } from '@/utils/shared'
 const { interpolate } = transform
-import Vue from 'vue'
 
 export default {
     data() {

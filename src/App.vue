@@ -27,14 +27,14 @@ export default {
         'breathing-tower': PurpleTower,
         'wandering-spheres': WanderingNav,
         'revolving-lights': HoverLight,
-        'pyramid-follow': PyramidFollow
+        'trailing-pyramid': PyramidFollow
     },
     data() {
         return {
             toRender: [
                 'breathing-tower',
                 'revolving-lights',
-                'pyramid-follow',
+                'trailing-pyramid',
                 'wandering-spheres'
             ]
         }
