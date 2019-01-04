@@ -16,12 +16,13 @@
 </template>
 
 <script>
+import startCase from 'lodash/startCase'
 import PurpleTower from './examples/PurpleTower'
 import WanderingNav from './examples/WanderingNav'
 import HoverLight from './examples/HoverLight'
 import PyramidFollow from './examples/PyramidFollow'
 import ShapeClicker from './examples/ShapeClicker'
-import startCase from 'lodash/startCase'
+import CartoonPipe from './examples/CartoonPipe'
 
 export default {
     components: {
@@ -29,7 +30,8 @@ export default {
         'wandering-spheres': WanderingNav,
         'revolving-lights': HoverLight,
         'trailing-pyramid': PyramidFollow,
-        'shape-clicker': ShapeClicker
+        'shape-clicker': ShapeClicker,
+        'cartoon-pipe': CartoonPipe
     },
     data() {
         return {
@@ -38,7 +40,8 @@ export default {
                 'revolving-lights',
                 'trailing-pyramid',
                 'wandering-spheres',
-                'shape-clicker'
+                'shape-clicker',
+                'cartoon-pipe'
             ]
         }
     },
@@ -72,9 +75,9 @@ export default {
         list-style: none;
         padding: 0;
         margin: 0;
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        grid-gap: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
         .item {
             width: 200px;
@@ -84,6 +87,7 @@ export default {
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            margin: 20px;
 
             .title {
                 border-bottom: 1px solid $black;
