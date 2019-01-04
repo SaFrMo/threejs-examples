@@ -20,6 +20,7 @@ import PurpleTower from './examples/PurpleTower'
 import WanderingNav from './examples/WanderingNav'
 import HoverLight from './examples/HoverLight'
 import PyramidFollow from './examples/PyramidFollow'
+import ShapeClicker from './examples/ShapeClicker'
 import startCase from 'lodash/startCase'
 
 export default {
@@ -27,7 +28,8 @@ export default {
         'breathing-tower': PurpleTower,
         'wandering-spheres': WanderingNav,
         'revolving-lights': HoverLight,
-        'trailing-pyramid': PyramidFollow
+        'trailing-pyramid': PyramidFollow,
+        'shape-clicker': ShapeClicker
     },
     data() {
         return {
@@ -35,7 +37,8 @@ export default {
                 'breathing-tower',
                 'revolving-lights',
                 'trailing-pyramid',
-                'wandering-spheres'
+                'wandering-spheres',
+                'shape-clicker'
             ]
         }
     },
