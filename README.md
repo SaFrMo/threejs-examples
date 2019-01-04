@@ -2,6 +2,7 @@
 
 -   Document raycaster mixin
 -   Research - cloning a THREE Vector3
+-   Example - applying scene lighting to custom shader ([link](https://csantosbh.wordpress.com/2014/01/09/custom-shaders-with-three-js-uniforms-textures-and-lighting/))
 
 ## Adding a new example:
 
