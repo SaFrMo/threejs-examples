@@ -23,6 +23,7 @@ import HoverLight from './examples/HoverLight'
 import PyramidFollow from './examples/PyramidFollow'
 import ShapeClicker from './examples/ShapeClicker'
 import CartoonPipe from './examples/CartoonPipe'
+import RingOfBoxes from './examples/RingOfBoxes'
 
 export default {
     components: {
@@ -31,7 +32,8 @@ export default {
         'revolving-lights': HoverLight,
         'trailing-pyramid': PyramidFollow,
         'shape-clicker': ShapeClicker,
-        'cartoon-pipe': CartoonPipe
+        'cartoon-pipe': CartoonPipe,
+        'rings-of-boxes': RingOfBoxes
     },
     data() {
         return {
@@ -41,7 +43,8 @@ export default {
                 'trailing-pyramid',
                 'wandering-spheres',
                 'shape-clicker',
-                'cartoon-pipe'
+                'cartoon-pipe',
+                'rings-of-boxes'
             ]
         }
     },

@@ -18,7 +18,7 @@ export default {
 
             // reusable material
             const mat = new THREE.MeshLambertMaterial({
-                color: 0x666666
+                color: 0xffffff
             })
 
             // sphere
