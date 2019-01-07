@@ -35,7 +35,7 @@ export default {
         'shape-clicker': ShapeClicker,
         'cartoon-pipe': CartoonPipe,
         'rings-of-boxes': RingOfBoxes,
-        'whirling-points': PointTest
+        'box-of-boxes': PointTest
     },
     data() {
         return {
@@ -47,7 +47,7 @@ export default {
                 'shape-clicker',
                 'cartoon-pipe',
                 'rings-of-boxes',
-                'whirling-points'
+                'box-of-boxes'
             ]
         }
     },
