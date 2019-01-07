@@ -24,6 +24,7 @@ import PyramidFollow from './examples/PyramidFollow'
 import ShapeClicker from './examples/ShapeClicker'
 import CartoonPipe from './examples/CartoonPipe'
 import RingOfBoxes from './examples/RingOfBoxes'
+import PointTest from './examples/PointTest'
 
 export default {
     components: {
@@ -33,7 +34,8 @@ export default {
         'trailing-pyramid': PyramidFollow,
         'shape-clicker': ShapeClicker,
         'cartoon-pipe': CartoonPipe,
-        'rings-of-boxes': RingOfBoxes
+        'rings-of-boxes': RingOfBoxes,
+        'whirling-points': PointTest
     },
     data() {
         return {
@@ -44,7 +46,8 @@ export default {
                 'wandering-spheres',
                 'shape-clicker',
                 'cartoon-pipe',
-                'rings-of-boxes'
+                'rings-of-boxes',
+                'whirling-points'
             ]
         }
     },
