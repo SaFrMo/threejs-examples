@@ -5,8 +5,8 @@
 <script>
 import VueThreeWrap from 'vue-three-wrap'
 import * as THREE from 'three'
-import { PerlinNoise } from '../utils/shared'
-import { wrap } from '@popmotion/popcorn'
+// import { PerlinNoise } from '../utils/shared'
+// import { wrap } from '@popmotion/popcorn'
 import Simplex from 'perlin-simplex'
 
 const ref = {}
@@ -25,7 +25,7 @@ export default {
             // noise
             noiseScale: 0.1,
             noiseOffset: 0,
-            noiseSpeed: 0.01,
+            noiseSpeed: 0.005,
             // enter seed as return value of `random`
             simplex: new Simplex({ random: () => 1 }),
 
@@ -37,7 +37,9 @@ export default {
     methods: {
         start({ camera, scene }) {
             // move camera back
-            camera.position.z = 3
+            camera.position.z = 4
+            camera.position.y = -2
+            camera.lookAt(new THREE.Vector3(0, 0, 0))
 
             // "wind" will be a 1d array of Vector2s, from top left to bottom right
             ref.wind = []
@@ -62,8 +64,8 @@ export default {
                         ),
                         vector.x,
                         0x0000ff,
-                        0.1,
-                        0.1
+                        2,
+                        2
                     )
                     scene.add(arrow)
 
@@ -105,7 +107,29 @@ export default {
             // add points to scene
             scene.add(ref.points)
         },
-        update({ scene }) {
+        update() {
+            // update noise offset
+            this.noiseOffset += this.noiseSpeed
+
+            // update wind
+            ref.wind.forEach((v, i) => {
+                // get coordinates of this wind vector
+                const x = i % this.windFieldWidth
+                const y = Math.floor(i / this.windFieldWidth)
+
+                // get new noise value
+                const noise =
+                    this.simplex.noise(
+                        x * this.noiseScale + this.noiseOffset,
+                        y * this.noiseScale
+                    ) +
+                    1 / 2
+
+                v.vector.add(new THREE.Vector3(noise, 0, 0))
+                // see https://github.com/aframevr/aframe-inspector/issues/524
+                v.arrow.setLength(Math.max(noise, 0.00001))
+            })
+
             // update each vertex
             // ref.points.geometry.vertices.forEach(v => {
             //     const delta =
