@@ -8,7 +8,7 @@ import * as THREE from 'three'
 
 // Copied from https://codepen.io/EastingAndNorthing/pen/QpYWQq?editors=0010
 
-const ref = {}
+const ref = { particles: [] }
 let geo = null
 let mat = null
 
@@ -22,8 +22,8 @@ class Particle {
         this.vm = vm
 
         // TODO: is this necessary?
-        this.mesh.geo.dynamic = true
-        this.mesh.geo.verticesNeedUpdate = true
+        this.mesh.geometry.dynamic = true
+        this.mesh.geometry.verticesNeedUpdate = true
         this.acc.multiplyScalar()
 
         scene.add(this.mesh)
@@ -68,7 +68,9 @@ export default {
         return {
             noiseStrength: 0.8,
             particleSpeed: 0.1,
-            size: 10
+            size: 50,
+
+            numParticles: 200
         }
     },
     methods: {
@@ -77,9 +79,7 @@ export default {
             camera.position.z = 10
 
             // add light
-            scene.add(new THREE.HemisphereLight(0xff0033, 0x9900ff, 1))
-
-            ref.particles = []
+            // scene.add(new THREE.HemisphereLight(0xff0033, 0x9900ff, 1))
 
             // geometry
             geo = new THREE.Geometry()
@@ -94,7 +94,23 @@ export default {
                 blending: THREE.AdditiveBlending
             })
         },
-        update() {}
+        update({ scene }) {
+            if (mat == null) {
+                return
+            }
+
+            // make sure we have enough particles
+            while (ref.particles.length < this.numParticles) {
+                const p = new Particle(
+                    THREE.Math.randFloatSpread(this.size),
+                    THREE.Math.randFloatSpread(this.size),
+                    THREE.Math.randFloatSpread(this.size),
+                    this,
+                    scene
+                )
+                ref.particles.push(p)
+            }
+        }
     }
 }
 </script>
