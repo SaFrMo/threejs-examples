@@ -16,6 +16,7 @@
         "@vue/cli": "^3.2.1",
         "lodash": "^4.17.11",
         "node-sass": "^4.11.0",
+        "perlin-simplex": "0.0.3",
         "sass-loader": "^7.1.0",
         "vue-three-wrap": "^1.0.1"
     },
