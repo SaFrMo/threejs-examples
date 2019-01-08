@@ -12,6 +12,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@popmotion/popcorn": "^0.3.1",
         "@vue/cli": "^3.2.1",
         "lodash": "^4.17.11",
         "node-sass": "^4.11.0",
