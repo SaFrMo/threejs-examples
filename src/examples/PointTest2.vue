@@ -23,10 +23,11 @@ export default {
             numParticles: 2000,
 
             // noise
-            noiseScale: 10,
+            noiseScale: 0.1,
             noiseOffset: 0,
             noiseSpeed: 0.01,
-            simplex: new Simplex(),
+            // enter seed as return value of `random`
+            simplex: new Simplex({ random: () => 1 }),
 
             // wind
             windFieldWidth: 5,
@@ -50,7 +51,6 @@ export default {
                             1) /
                         2
                     const vector = new THREE.Vector3(noise, 0, 0)
-                    ref.wind.push(vector)
                     const arrow = new THREE.ArrowHelper(
                         vector.clone().normalize(),
                         new THREE.Vector3(
@@ -66,6 +66,11 @@ export default {
                         0.1
                     )
                     scene.add(arrow)
+
+                    ref.wind.push({
+                        vector,
+                        arrow
+                    })
                 }
             }
 
