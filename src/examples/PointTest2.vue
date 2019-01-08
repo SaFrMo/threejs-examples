@@ -20,7 +20,7 @@ export default {
             // particles
             particleSpeed: 0.1,
             size: 5,
-            numParticles: 200,
+            numParticles: 2000,
             particleSize: 0.2,
 
             // noise
@@ -52,12 +52,10 @@ export default {
                 for (let x = 0; x < this.windFieldHeight; x++) {
                     // run noise function on cell coordinates
                     const noise =
-                        (this.simplex.noise(
+                        this.simplex.noise(
                             x * this.noiseScale,
                             y * this.noiseScale
-                        ) +
-                            1) /
-                        2
+                        ) / 2
                     const vector = new THREE.Vector3(noise, 0, 0)
 
                     // build a helper arrow
@@ -92,7 +90,7 @@ export default {
                 color: '#cc0000',
                 size: this.particleSize,
                 transparent: true,
-                opacity: 1,
+                opacity: 0.6,
                 blending: THREE.AdditiveBlending
             })
 
@@ -137,15 +135,13 @@ export default {
                 const y = Math.floor(i / this.windFieldWidth)
 
                 // get new noise value
-                const noise =
-                    this.simplex.noise(
-                        x * this.noiseScale + this.noiseOffset,
-                        y * this.noiseScale
-                    ) +
-                    1 / 2
+                const noise = this.simplex.noise(
+                    x * this.noiseScale + this.noiseOffset,
+                    y * this.noiseScale + this.noiseOffset
+                )
 
                 // update actual vector
-                v.vector.set(noise, 0, 0)
+                v.vector.set(noise, noise, 0)
                 // see https://github.com/aframevr/aframe-inspector/issues/524
                 v.arrow.setLength(Math.max(noise, 0.00001))
             })
@@ -161,13 +157,10 @@ export default {
                 const linearIndex = y * this.windFieldWidth + x
 
                 const nearestWindVector = ref.wind[linearIndex].vector.clone()
+                nearestWindVector.multiplyScalar(this.windStrength)
 
-                p.velocity.set(
-                    nearestWindVector.x,
-                    nearestWindVector.y,
-                    nearestWindVector.z
-                )
-                p.velocity.multiplyScalar(this.windStrength)
+                p.acceleration.set(nearestWindVector)
+                p.velocity.add(p.acceleration)
 
                 p.position.x = w(p.position.x + p.velocity.x)
                 p.position.y = w(p.position.y + p.velocity.y)
