@@ -14,6 +14,7 @@ export default {
     },
     methods: {
         start({ scene, camera }) {
+            camera.position.y = 0.75
             camera.position.z = 10
 
             // reusable material

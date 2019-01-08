@@ -25,6 +25,7 @@ import ShapeClicker from './examples/ShapeClicker'
 import CartoonPipe from './examples/CartoonPipe'
 import RingOfBoxes from './examples/RingOfBoxes'
 import PointTest from './examples/PointTest'
+import PointTest2 from './examples/PointTest2'
 
 export default {
     components: {
@@ -35,7 +36,8 @@ export default {
         'shape-clicker': ShapeClicker,
         'cartoon-pipe': CartoonPipe,
         'rings-of-boxes': RingOfBoxes,
-        'box-of-boxes': PointTest
+        'box-of-boxes': PointTest,
+        'point-test-2': PointTest2
     },
     data() {
         return {
@@ -47,7 +49,8 @@ export default {
                 'shape-clicker',
                 'cartoon-pipe',
                 'rings-of-boxes',
-                'box-of-boxes'
+                'box-of-boxes',
+                'point-test-2'
             ]
         }
     },
