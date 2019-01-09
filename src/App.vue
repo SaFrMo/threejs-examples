@@ -26,6 +26,7 @@ import CartoonPipe from './examples/CartoonPipe'
 import RingOfBoxes from './examples/RingOfBoxes'
 import PointTest from './examples/PointTest'
 import PointTest2 from './examples/PointTest2'
+import LightingTest from './examples/LightingTest'
 
 export default {
     components: {
@@ -37,7 +38,8 @@ export default {
         'cartoon-pipe': CartoonPipe,
         'rings-of-boxes': RingOfBoxes,
         'box-of-boxes': PointTest,
-        'point-test-2': PointTest2
+        'point-test-2': PointTest2,
+        'lighting-test': LightingTest
     },
     data() {
         return {
@@ -50,7 +52,8 @@ export default {
                 'cartoon-pipe',
                 'rings-of-boxes',
                 'box-of-boxes',
-                'point-test-2'
+                // 'point-test-2'
+                'lighting-test'
             ]
         }
     },
