@@ -39,7 +39,7 @@ export default {
         'rings-of-boxes': RingOfBoxes,
         'box-of-boxes': PointTest,
         'point-test-2': PointTest2,
-        'lighting-test': LightingTest
+        'light-ref': LightingTest
     },
     data() {
         return {
@@ -53,7 +53,7 @@ export default {
                 'rings-of-boxes',
                 'box-of-boxes',
                 // 'point-test-2'
-                'lighting-test'
+                'light-ref'
             ]
         }
     },
